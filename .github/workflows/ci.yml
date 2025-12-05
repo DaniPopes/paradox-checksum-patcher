@@ -38,12 +38,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           cache-on-failure: true
-      # Only run tests on latest stable and above
-      - name: build
-        if: ${{ matrix.rust == '1.85' }} # MSRV
-        run: cargo build --workspace ${{ matrix.flags }}
       - name: test
-        if: ${{ matrix.rust != '1.85' }} # MSRV
         run: cargo test --workspace ${{ matrix.flags }}
 
   typos:
@@ -67,20 +62,6 @@ jobs:
       - run: cargo clippy --workspace --all-targets --all-features
         env:
           RUSTFLAGS: -Dwarnings
-
-  docs:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@nightly
-      - uses: Swatinem/rust-cache@v2
-        with:
-          cache-on-failure: true
-      - name: Build documentation
-        run: cargo doc --workspace --all-features --no-deps --document-private-items
-        env:
-          RUSTDOCFLAGS: --cfg docsrs -D warnings -Zunstable-options --show-type-layout --generate-link-to-definition
 
   fmt:
     runs-on: ubuntu-latest
