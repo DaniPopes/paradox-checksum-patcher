@@ -17,5 +17,3 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: target/dist/paradox-checksum-patcher.exe
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
