@@ -1,21 +1,64 @@
-# Paradox games checksum patcher
+# Paradox Checksum Patcher
 
-This is a patcher, that forces game ignore checksum on starting and loading ironman game.
-It gives you ability to use mods, that change checksum, and still get achievements.
-Patcher DON'T give you ability to use console or use achievement-disabler game rules and earn achievements.
+A tool that patches Paradox game executables to bypass ironman checksum validation, allowing you to use mods that change checksum while still earning achievements.
 
-# IMPORTANT
-Patcher modifying only currently existing game executable, if Paradox release new version of game, you need to run patcher again.
+**Note:** This patcher does NOT enable console commands or achievement-disabling game rules in ironman mode.
 
-# Installation
+## Important
 
-1. Download latest binary of patcher from releases (or build it from source if you know what you doing)
-2. Unzip it in game directory (right click on game on steam > Manage > Browse local files). `universal-checksum-patcher.exe` should be next to your `eu4.exe` or `hoi4.exe`
-3. Run `universal-checksum-patcher.exe`
+The patcher only modifies the current game executable. If Paradox releases a game update, you'll need to run the patcher again.
 
-# Supported games and platforms
-|                       | Windows                | Linux(native) | MacOS  |
-|-----------------------|------------------------|---------------|--------|
-| Europa Universalis IV | Yes :heavy_check_mark: | No :x:        | No :x: |
-| Europa Universalis V  | Yes :heavy_check_mark: | No :x:        | No :x: |
-| Hearts of Iron IV     | Yes :heavy_check_mark: | No :x:        | No :x: |
+## Installation
+
+### Option 1: Download Pre-built Binary
+
+Download the latest `paradox-checksum-patcher.exe` from [Releases](https://github.com/DaniPopes/paradox-checksum-patcher/releases)
+
+### Option 2: Build from Source
+
+**Prerequisites:** Install Rust from [rust-lang.org](https://www.rust-lang.org/tools/install)
+
+```bash
+# Clone the repository
+git clone https://github.com/DaniPopes/paradox-checksum-patcher.git
+cd paradox-checksum-patcher
+
+# Build release binary
+cargo build --release
+
+# Binary will be at: target/release/paradox-checksum-patcher[.exe]
+```
+
+## Usage
+
+### Option 1: Place in Game Directory
+
+1. Place `paradox-checksum-patcher.exe` in your game directory (Steam: Right-click game → Manage → Browse local files)
+2. Run `paradox-checksum-patcher.exe`
+
+The patcher will automatically detect and patch supported game executables in the directory.
+
+### Option 2: Run from Command Line
+
+```bash
+# Auto-detect games in current directory
+./paradox-checksum-patcher.exe
+
+# Patch specific file
+./paradox-checksum-patcher.exe path/to/eu4.exe
+
+# Patch multiple files or directories
+./paradox-checksum-patcher.exe ./eu4.exe ~/.local/share/Steam/steamapps/common/Europa\ Universalis\ V/binaries/
+```
+
+## Supported Games and Platforms
+
+|                       | Windows | Linux | macOS |
+|-----------------------|---------|-------|-------|
+| Europa Universalis IV | ✓       | ✗     | ✗     |
+| Europa Universalis V  | ✓       | ✗     | ✗     |
+| Hearts of Iron IV     | ✓       | ✗     | ✗     |
+
+**Note:** The table above refers to native game executables.
+(Note that EU5 doesn't have native Linux/macOS binaries)
+However, the patcher itself is cross-platform and can patch Windows executables from Linux/macOS, making it usable with Proton.
